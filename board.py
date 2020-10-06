@@ -5,22 +5,32 @@ class Board:
         self.length = length 
         self.width = width
         self.houses = houses
-        self.board = None
+        self.board = []
         self.hospital = [] # array that holds the cordinates to each hospital as a touple
 
     def create2DArray(self):
-        self.board = [[' ' for i in range(self.length)] for j in range(self.width)]
-
+        self.board = [['0' for i in range(self.length)] for j in range(self.width)]
+        # for i in range(self.length): 
+        #     col = [] 
+        #     for j in range(self.width): 
+        #         col.append(' ') 
+        #         self.board.append(col) 
+                
     def printArray(self):
-        for row in self.board:
-            print(row) 
+        # for row in self.board:
+        #     print(row) 
+
+        for y in range(self.length):
+            for x in range(self.width):
+                print( self.board[x][y] ,end = ' ')
+            print()
 
     def insertHospital(self):
         count = 0
         while count < 2:
             tempx = random.randrange(0, self.length)
             tempy = random.randrange(0, self.width)
-            if self.board[tempx][tempy] == ' ': 
+            if self.board[tempx][tempy] == '0': 
                 self.board[tempx][tempy] = 'H'
                 self.hospital.append((tempx, tempy))
                 count+=1
@@ -31,7 +41,7 @@ class Board:
         while count < self.houses:
             tempx = random.randrange(0, self.length)
             tempy = random.randrange(0, self.width)
-            if self.board[tempx][tempy] == ' ':
+            if self.board[tempx][tempy] == '0':
                 self.board[tempx][tempy] = 'h'
                 count+=1
 
@@ -49,10 +59,10 @@ class Board:
             new_cord = (cord[0]-1, cord[1])
             if new_cord[0] < 0:
                 return None
-            if self.board[new_cord[0]][new_cord[1]] == ' ':
+            if self.board[new_cord[0]][new_cord[1]] == '0':
                 self.hospital[hosptial_num] = new_cord
                 new_array[new_cord[0]][new_cord[1]] = 'H'
-                new_array[cord[0]][cord[1]] = ' '
+                new_array[cord[0]][cord[1]] = '0'
                 new_board = Board(self.length, self.width, self.houses)
                 new_board.board = new_array
                 new_board.hospital = self.hospital
@@ -63,10 +73,10 @@ class Board:
             new_cord = (cord[0]+1, cord[1])
             if new_cord[0] >= self.length:
                 return None
-            if self.board[new_cord[0]][new_cord[1]] == ' ':
+            if self.board[new_cord[0]][new_cord[1]] == '0':
                 self.hospital[hosptial_num] = new_cord
                 new_array[new_cord[0]][new_cord[1]] = 'H'
-                new_array[cord[0]][cord[1]] = ' '
+                new_array[cord[0]][cord[1]] = '0'
                 new_board = Board(self.length, self.width, self.houses)
                 new_board.board = new_array
                 new_board.hospital = self.hospital
@@ -77,10 +87,10 @@ class Board:
             new_cord = (cord[0], cord[1]-1)
             if new_cord[1] < 0:
                 return None 
-            if self.board[new_cord[0]][new_cord[1]] == ' ':
+            if self.board[new_cord[0]][new_cord[1]] == '0':
                 self.hospital[hosptial_num] = new_cord
                 new_array[new_cord[0]][new_cord[1]] = 'H'
-                new_array[cord[0]][cord[1]] = ' '
+                new_array[cord[0]][cord[1]] = '0'
                 new_board = Board(self.length, self.width, self.houses)
                 new_board.board = new_array
                 new_board.hospital = self.hospital
@@ -91,10 +101,10 @@ class Board:
             new_cord = (cord[0], cord[1]+1)
             if new_cord[1] >= self.width:
                 return None 
-            if self.board[new_cord[0]][new_cord[1]] == ' ':
+            if self.board[new_cord[0]][new_cord[1]] == '0':
                 self.hospital[hosptial_num] = new_cord
                 new_array[new_cord[0]][new_cord[1]] = 'H'
-                new_array[cord[0]][cord[1]] = ' '
+                new_array[cord[0]][cord[1]] = '0'
                 new_board = Board(self.length, self.width, self.houses)
                 new_board.board = new_array
                 new_board.hospital = self.hospital
@@ -117,7 +127,7 @@ class Board:
         return state
         
 
-b = Board(10,10,2)
+b = Board(3,5,2)
 
 b.launch()
 test = b.move()
