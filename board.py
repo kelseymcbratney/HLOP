@@ -119,47 +119,47 @@ Enjoy my chicken stratch
 
 
 
-def run():
-    for i in range(len(test)):
-        print(i)
-        temp = test[i]
-        if temp != None:
-            print("New Hospital Cords",temp.hospital)
-            print("New Manhatten Distance", temp.calc_manhatten())
-            tup1 = (temp,temp.calc_manhatten())
-            print(tup1)
-            savedStates.append(tup1)
-            temp.printArray()
+# def run():
+#     for i in range(len(test)):
+#         print(i)
+#         temp = test[i]
+#         if temp != None:
+#             print("New Hospital Cords",temp.hospital)
+#             print("New Manhatten Distance", temp.calc_manhatten())
+#             tup1 = (temp,temp.calc_manhatten())
+#             print(tup1)
+#             savedStates.append(tup1)
+#             temp.printArray()
 
 
-b = Board(7,5,4)
-b.launch()
+# b = Board(7,5,4)
+# b.launch()
 
-print("*******Original*********")
-b.printArray()
-b.randomize()
-print("*******Random***********")
-b.printArray()
+# print("*******Original*********")
+# b.printArray()
+# b.randomize()
+# print("*******Random***********")
+# b.printArray()
 
-print("Orginal Hospital Cords", b.hospital)
+# print("Orginal Hospital Cords", b.hospital)
 
-test = b.move()
-savedStates = []
+# test = b.move()
+# savedStates = []
 
 
-run()
+# run()
 
-print(savedStates)
+# print(savedStates)
 
-savedStates.sort(key = lambda x:x[1]) # can be used for finding the lowest manhatten distance, index 0 will be new state to move into
-lowestManhattan = savedStates[0]
+# savedStates.sort(key = lambda x:x[1]) # can be used for finding the lowest manhatten distance, index 0 will be new state to move into
+# lowestManhattan = savedStates[0]
 
-print(savedStates)
-print(lowestManhattan[0])
+# print(savedStates)
+# print(lowestManhattan[0])
 
-test = lowestManhattan[0]
-test = test.move()
+# test = lowestManhattan[0]
+# test = test.move()
 
-run()
+# run()
 
 
