@@ -13,8 +13,8 @@ class Solver:
     def hillclimb(self, startState):
         restarts = 0
         best_state = (self.startState, self.startState.calc_manhatten())
-        while retarts <= self.LIMIT:
-            
+        while restarts <= self.LIMIT:
+            pass
         pass
 
     def simulatedAnnealing(self, startState):
