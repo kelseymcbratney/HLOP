@@ -1,4 +1,4 @@
-from newboard import Board
+from board import Board
 
 print("How many rows?")
 rows = int(input())
