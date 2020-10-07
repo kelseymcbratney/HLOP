@@ -1,37 +1,28 @@
 import random
-from solver import Solver
 
 class Board:
-    def __init__(self,b_row,b_col,houses):
-        self.b_row = b_row # x
-        self.b_col = b_col # y
+    def __init__(self,length,width,houses):
+        self.length = length 
+        self.width = width
         self.houses = houses
-        self.board = []
+        self.board = None
         self.hospital = [] # array that holds the cordinates to each hospital as a touple
 
     def create2DArray(self):
-        #self.board = [['0' for i in range(self.b_row)] for j in range(self.b_col)]
-        for i in range(self.b_col): 
-            col = [] 
-            for j in range(self.b_row): 
-                col.append('0') 
-            self.board.append(col) 
-                
-    def printArray(self):
-        # for row in self.board:
-        #     print(row) 
+        self.board = [[' ' for i in range(self.length)] for j in range(self.width)]
 
-        for x in range(self.b_col):
-            for y in range(self.b_row):
-                print( self.board[x][y] ,end = ' ')
+    def printArray(self):
+        for x in range(self.width):
+            for y in range(self.length):
+                print( self.board[x][y] ,end = '|')
             print()
 
     def insertHospital(self):
         count = 0
         while count < 2:
-            tempx = random.randrange(0, self.b_col)
-            tempy = random.randrange(0, self.b_row)
-            if self.board[tempx][tempy] == '0': 
+            tempx = random.randrange(0, self.length)
+            tempy = random.randrange(0, self.width)
+            if self.board[tempx][tempy] == ' ': 
                 self.board[tempx][tempy] = 'H'
                 self.hospital.append((tempx, tempy))
                 count+=1
@@ -40,9 +31,9 @@ class Board:
     def insertHouse(self):
         count = 0
         while count < self.houses:
-            tempx = random.randrange(0, self.b_col)
-            tempy = random.randrange(0, self.b_row)
-            if self.board[tempx][tempy] == '0':
+            tempx = random.randrange(0, self.length)
+            tempy = random.randrange(0, self.width)
+            if self.board[tempx][tempy] == ' ':
                 self.board[tempx][tempy] = 'h'
                 count+=1
 
@@ -60,11 +51,11 @@ class Board:
             new_cord = (cord[0]-1, cord[1])
             if new_cord[0] < 0:
                 return None
-            if self.board[new_cord[0]][new_cord[1]] == '0':
+            if self.board[new_cord[0]][new_cord[1]] == ' ':
                 self.hospital[hosptial_num] = new_cord
                 new_array[new_cord[0]][new_cord[1]] = 'H'
-                new_array[cord[0]][cord[1]] = '0'
-                new_board = Board(self.b_col, self.b_row, self.houses)
+                new_array[cord[0]][cord[1]] = ' '
+                new_board = Board(self.length, self.width, self.houses)
                 new_board.board = new_array
                 new_board.hospital = self.hospital
                 new_board.hospital[hosptial_num] = new_cord
@@ -72,13 +63,13 @@ class Board:
                 return new_board
         elif direction == "right":
             new_cord = (cord[0]+1, cord[1])
-            if new_cord[0] >= self.b_col:
+            if new_cord[0] >= self.length:
                 return None
-            if self.board[new_cord[0]][new_cord[1]] == '0':
+            if self.board[new_cord[0]][new_cord[1]] == ' ':
                 self.hospital[hosptial_num] = new_cord
                 new_array[new_cord[0]][new_cord[1]] = 'H'
-                new_array[cord[0]][cord[1]] = '0'
-                new_board = Board(self.b_col, self.b_row, self.houses)
+                new_array[cord[0]][cord[1]] = ' '
+                new_board = Board(self.length, self.width, self.houses)
                 new_board.board = new_array
                 new_board.hospital = self.hospital
                 new_board.hospital[hosptial_num] = new_cord
@@ -88,11 +79,11 @@ class Board:
             new_cord = (cord[0], cord[1]-1)
             if new_cord[1] < 0:
                 return None 
-            if self.board[new_cord[0]][new_cord[1]] == '0':
+            if self.board[new_cord[0]][new_cord[1]] == ' ':
                 self.hospital[hosptial_num] = new_cord
                 new_array[new_cord[0]][new_cord[1]] = 'H'
-                new_array[cord[0]][cord[1]] = '0'
-                new_board = Board(self.b_col, self.b_row, self.houses)
+                new_array[cord[0]][cord[1]] = ' '
+                new_board = Board(self.length, self.width, self.houses)
                 new_board.board = new_array
                 new_board.hospital = self.hospital
                 new_board.hospital[hosptial_num] = new_cord
@@ -100,13 +91,13 @@ class Board:
                 return new_board
         elif direction == "down":
             new_cord = (cord[0], cord[1]+1)
-            if new_cord[1] >= self.b_row:
+            if new_cord[1] >= self.width:
                 return None 
-            if self.board[new_cord[0]][new_cord[1]] == '0':
+            if self.board[new_cord[0]][new_cord[1]] == ' ':
                 self.hospital[hosptial_num] = new_cord
                 new_array[new_cord[0]][new_cord[1]] = 'H'
-                new_array[cord[0]][cord[1]] = '0'
-                new_board = Board(self.b_col, self.b_row, self.houses)
+                new_array[cord[0]][cord[1]] = ' '
+                new_board = Board(self.length, self.width, self.houses)
                 new_board.board = new_array
                 new_board.hospital = self.hospital
                 new_board.hospital[hosptial_num] = new_cord
@@ -126,14 +117,9 @@ class Board:
                     state.append(new_state)
         print(state)
         return state
-    
-    def randomize(self):
-        for hos in self.hospital:
-            self.board[hos[0]][hos[1]] = "0"
-        self.insertHospital()
         
 
-b = Board(3,5,2)
+b = Board(10,10,2)
 
 b.launch()
 test = b.move()
